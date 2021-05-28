@@ -73,7 +73,8 @@ class CreatePointBones(bpy.types.Operator):
     def execute(self, context):    
         o =  bpy.context.active_object
         groups = o.vertex_groups 
-        bpy.ops.object.armature_add(enter_editmode=True, align='WORLD', location= o.location, scale=(1, 1, 1))
+         
+        bpy.ops.object.armature_add(enter_editmode=True,  location= o.location) # align='WORLD', scale=(1, 1, 1),
         arm = bpy.context.active_object
         for grp in groups: 
             #bone.head = grp 
@@ -93,7 +94,7 @@ class CreatePointBones(bpy.types.Operator):
                 bone.head = center 
                 bone.tail = center + Vector(self.tail_shift)
                 
-                
+        bpy.ops.object.editmode_toggle()
         return {'FINISHED'}  
 
 class TransferVGWeights(bpy.types.Operator):
